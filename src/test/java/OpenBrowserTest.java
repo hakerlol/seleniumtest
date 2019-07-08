@@ -27,6 +27,6 @@ public class OpenBrowserTest {
     public void test(){
         driver.get(url);
         assertThat(driver.getCurrentUrl(), is(url));
-        assertThat(driver.getPageSource().contains("wow"), is(true));
+        assertThat(String.format("Actual page info is %s%nExpected, that page contains \"wow\"", driver.getPageSource()), driver.getPageSource().contains("wow"), is(true));
     }
 }
