@@ -4,9 +4,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-
 
 public class OpenBrowserTest {
     private WebDriver driver;
@@ -14,7 +11,7 @@ public class OpenBrowserTest {
 
     @BeforeTest
     public void setUp(){
-        url = "http://localhost:8080/main";
+        url = "https://google.com";
         driver = new ChromeDriver();
     }
 
@@ -25,8 +22,6 @@ public class OpenBrowserTest {
 
     @Test
     public void test(){
-        driver.get(url);
-        assertThat(driver.getCurrentUrl(), is(url));
-        assertThat(String.format("Actual page info is %s%nExpected, that page contains \"wow\"", driver.getPageSource()), driver.getPageSource().contains("wow"), is(true));
+
     }
 }
