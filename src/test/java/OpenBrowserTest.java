@@ -1,11 +1,12 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 
 
 public class OpenBrowserTest {
@@ -14,7 +15,7 @@ public class OpenBrowserTest {
 
     @BeforeTest
     public void setUp(){
-        url = "http://localhost:8080/main";
+        url = "https://www.google.com/";
         driver = new ChromeDriver();
     }
 
@@ -26,7 +27,13 @@ public class OpenBrowserTest {
     @Test
     public void test(){
         driver.get(url);
-        assertThat(driver.getCurrentUrl(), is(url));
-        assertThat(String.format("Actual page info is %s%nExpected, that page contains \"wow\"", driver.getPageSource()), driver.getPageSource().contains("wow"), is(true));
+        WebDriverWait driverWait = new WebDriverWait(driver, 5);
+        By searchWindow = By.xpath("/html/body/div/div[3]/form/div[2]/div/div[1]/div/div[1]/input");
+        WebElement searchWindowElement = driverWait.until(ExpectedConditions.presenceOfElementLocated(searchWindow));
+        searchWindowElement.click();
+        searchWindowElement.sendKeys("How to google");
+        WebElement startSearch = driver.findElement(By.xpath("/html/body/div/div[3]/form/div[2]/div/div[3]/center/input[1]"));
+        startSearch.click();
+
     }
 }
